@@ -22,7 +22,11 @@ public class Player
     this.isComputer = isComputer;
   }
 
-  /*---------- get inputs from player and computer ----------*/
+  /**
+   * The func to get inputs from player and computer
+   * @param Input: BufferedReader created from MyConnectFour class, pass it in
+   * @return Column: the column player wants to put the counter in
+   */
   public int getInput(BufferedReader input)
   {
     int column = 0;

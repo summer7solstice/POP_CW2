@@ -10,6 +10,7 @@ import java.io.IOException;
   Define the new class 'Board' with some public functions.
   Define the new class 'Player' with some public functions.
 
+  @author Eddie Huang
 */
 public class MyConnectFour 
 {
@@ -18,7 +19,6 @@ public class MyConnectFour
   private Player player1;
   private Player player2; 
 
-  // initialize functions
   public MyConnectFour() 
   {
     input = new BufferedReader(new InputStreamReader(System.in));
@@ -39,7 +39,11 @@ public class MyConnectFour
     playGame();
   }
 
-  /*---------- the main function ----------*/
+  /**
+   * The func to start the game
+   * @param None
+   * @return None
+   */
   private void playGame() 
   {
     showIntroduction();
@@ -50,11 +54,11 @@ public class MyConnectFour
     // loop until there is a win or draw
     boolean win = false;
     boolean draw = false;
-    // flag: input sequence, even: player1 inputs, odd: player2 inputs
-    int flag = 0;
+    // turnCount: input sequence, even: player1 inputs, odd: player2 inputs, and count the number of turns
+    int turnCount = 0;
     while (!win)
     {
-      Player tempPlayer = playerArray[flag % 2];
+      Player tempPlayer = playerArray[turnCount % 2];
 
       int playerInput = tempPlayer.getInput(input);
       if(!isValid(playerInput))
@@ -69,7 +73,7 @@ public class MyConnectFour
       if (placed)
       {
         win = board.checkWinOrNot(tempPlayer.getCounter());
-        flag++;
+        turnCount++;
         System.out.println(board.getPrintableString());
       }
       else
@@ -80,7 +84,7 @@ public class MyConnectFour
       }
 
       // the board is full but no one wins
-      if (flag == 42 && !win) 
+      if (turnCount == 42 && !win) 
       {
         draw = true;
         break;
@@ -95,11 +99,15 @@ public class MyConnectFour
     else
     {
       // someone wins
-      System.out.print(flag % 2 != 0 ? "Player1 wins!" : "Player2 wins!");
+      System.out.print(turnCount % 2 != 0 ? "Player1 wins!" : "Player2 wins!");
     }
   }
 
-  /*---------- show the rules to player ----------*/
+  /**
+   * The func to show the rules to player
+   * @param None
+   * @return None
+   */
   private void showIntroduction()
   {
     String[] introStrArray = {
@@ -115,7 +123,11 @@ public class MyConnectFour
     }
   }
 
-  /*---------- check the input is valid or not ----------*/
+  /**
+   * The func to check the input is valid or not
+   * @param Input: input from players
+   * @return IsValid: the validation of the input
+   */
   private boolean isValid(int input)
   {
     boolean isValid = false;
@@ -128,7 +140,12 @@ public class MyConnectFour
     }
     return isValid;
   }
-  /*---------- choose PVE or PVP ----------*/
+
+  /**
+   * The func to get user input from keyboard
+   * @param None
+   * @return ToReturn: input string from keyboard
+   */
   private String pveOrPvp()
   {
     String toReturn = null;

@@ -12,7 +12,11 @@ public class Board
       this.counter2 = counter2;
   }
 
-  /*---------- function to print the chess board ----------*/
+  /**
+   * The func to get printable string from the board
+   * @param None
+   * @return The printable string
+   */
   public String getPrintableString()
   {
       String s = "";
@@ -40,25 +44,24 @@ public class Board
       return s;
   }
 
-  /*---------- check anyone has won or not ----------*/
-  // Encapsulation
-  /*
-    params:
-    player: r is the player, y is the computer
-  */
-  public boolean checkWinOrNot(char player) {
+  /**
+   * The func to check anyone has won or not
+   * @param Counter: the counter（char type）of the 'Player' class
+   * @return Haswon: the player who win or not
+   */
+  public boolean checkWinOrNot(char counter) {
     boolean hasWon = false;
     // use this origin point logic, do not have to enumarate every position
+    // (row,column) makes the origin of the line, then check whether it is longer or equal than 4
     // check horizontal
     for (int row = 0; row < board.length; row++) 
     {
       for (int column = 0; column < board[row].length - 3; column++) 
       {
-        // (row,column) makes the origin of the line, then check whether it is longer or equal than 4
-        if(board[row][column] == player &&
-            board[row][column+1] == player &&
-            board[row][column+2] == player &&
-            board[row][column+3] == player)
+        if(board[row][column] == counter &&
+            board[row][column+1] == counter &&
+            board[row][column+2] == counter &&
+            board[row][column+3] == counter)
         {
           hasWon = true;
           System.out.printf("The line is (%d,%d), (%d,%d), (%d,%d), (%d,%d)\n",column+1,row+1,column+2,row+1,column+3,row+1,column+4,row+1);
@@ -70,11 +73,10 @@ public class Board
     {
       for (int column = 0; column < board[row].length; column++) 
       {
-        // (row,column) makes the origin of the line, then check whether it is longer or equal than 4
-        if(board[row][column] == player &&
-            board[row-1][column] == player &&
-            board[row-2][column] == player &&
-            board[row-3][column] == player)
+        if(board[row][column] == counter &&
+            board[row-1][column] == counter &&
+            board[row-2][column] == counter &&
+            board[row-3][column] == counter)
         {
           hasWon = true;
           System.out.printf("The line is (%d,%d), (%d,%d), (%d,%d), (%d,%d)\n",column+1,row+1,column+1,row,column+1,row-1,column+1,row-2);
@@ -86,11 +88,10 @@ public class Board
     {
       for (int column = 0; column < board[row].length - 3; column++) 
       {
-        // (row,column) makes the origin of the line, then check whether it is longer or equal than 4
-        if(board[row][column] == player &&
-            board[row+1][column+1] == player &&
-            board[row+2][column+2] == player &&
-            board[row+3][column+3] == player)
+        if(board[row][column] == counter &&
+            board[row+1][column+1] == counter &&
+            board[row+2][column+2] == counter &&
+            board[row+3][column+3] == counter)
         {
           hasWon = true;
           System.out.printf("The line is (%d,%d), (%d,%d), (%d,%d), (%d,%d)\n",column+1,row+1,column+2,row+2,column+3,row+3,column+4,row+4);
@@ -102,11 +103,10 @@ public class Board
     {
       for (int column = 0; column < board[row].length - 3; column++) 
       {
-        // (row,column) makes the origin of the line, then check whether it is longer or equal than 4
-        if(board[row][column] == player &&
-            board[row-1][column+1] == player &&
-            board[row-2][column+2] == player &&
-            board[row-3][column+3] == player)
+        if(board[row][column] == counter &&
+            board[row-1][column+1] == counter &&
+            board[row-2][column+2] == counter &&
+            board[row-3][column+3] == counter)
         {
           hasWon = true;
           System.out.printf("The line is (%d,%d), (%d,%d), (%d,%d), (%d,%d)\n",column+1,row+1,column+2,row,column+3,row-1,column+4,row-2);
@@ -116,19 +116,16 @@ public class Board
     return hasWon;
   }
 
-  /*---------- place the counter ----------*/
-  /*
-    params:
-    player: r is the player, y is the computer
-    position: which column
-
-    output:
-    placed: the column could be full, then player has to input again
-  */
-  public boolean placeCounter(char player, int position) 
+  /**
+   * The func to place the counter into the board
+   * @param Counter: the counter（char type）of the 'Player' class
+   *        Position: the column player choose to put the counter in
+   * @return Placed: the counter is placed or not
+   */
+  public boolean placeCounter(char counter, int position) 
   {
     boolean placed = false;
-    if (player == counter1) 
+    if (counter == counter1) 
     {
       for (int i = board.length - 1; i >= 0; i--) 
       {
